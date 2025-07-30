@@ -11,9 +11,31 @@ class Aside extends Component
     /**
      * Create a new component instance.
      */
+
+    public $routes;
     public function __construct()
     {
-        //
+        $this->routes =[[
+            'label' => 'Dashboard',
+            'icon' => 'fas fa-tv',
+            'route_name' =>'dashboard',
+            'route_active' => 'dashboard',
+            'is_dropdown' => false,
+        ],[
+            'label' => 'Master Data',
+            'icon' => 'fas fa-database',
+            'route_active' => 'master-data.*',
+            'is_dropdown' => true,
+            'dropdown' => [
+                [
+                    'label' => 'kategori',
+                    'route_active' => 'master-data.kategori.*',
+                    'route_name' => 'master-data.kategori.index',
+                ]
+            ],
+
+        ]
+    ];
     }
 
     /**
@@ -23,4 +45,4 @@ class Aside extends Component
     {
         return view('components.admin.aside');
     }
-}
+};
