@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -20,7 +21,13 @@ Route::middleware('auth')->group(function () {
     Route::prefix('master-data')->as('master-data.')->group(function () {
         Route::prefix('kategori')->as('kategori.')->controller(KategoriController::class)->group(function () {
             Route::get('/', 'index')->name('index');
-   
+            Route::post('/store', 'store')->name('store');
+            Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+        });
+        Route::prefix('product')->as('product.')->controller(ProductController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::delete('/destroy/{id}', 'destroy')->name('destroy');
         });
     });
 });
