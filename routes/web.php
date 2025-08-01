@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
        Route::get('/','index')->name('index');
        Route::post('/store', 'store')->name('store');
        Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+       Route::post('ganti-password', 'gantiPassword')->name('ganti-password');
     });
     
     // master-data.kategori.index

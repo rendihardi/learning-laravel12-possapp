@@ -47,13 +47,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Logout</button>
-                </form>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                        {{ ucwords(Auth::user()->name) }}
+                    </button>
+                    <div class="dropdown-menu">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn" data-toggle="modal" data-target="#formGantiPassword">
+                            Ganti Password
+                        </button>
+
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn text-danger ">Logout</button>
+                        </form>
+                    </div>
+                </div>
+
             </ul>
         </nav>
         <!-- /.navbar -->
+        <x-user.form-ganti-password />
 
         <!-- Main Sidebar Container -->
         <x-admin.aside />
