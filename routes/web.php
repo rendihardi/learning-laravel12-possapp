@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -16,6 +17,12 @@ Route::post('/login', [LoginController::class, 'handleLogin'])->name('login')->m
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    Route::prefix('users')->as('users.')->controller(UserController::class)->group(function () {
+       Route::get('/','index')->name('index');
+       Route::post('/store', 'store')->name('store');
+       Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+    });
     
     // master-data.kategori.index
     Route::prefix('master-data')->as('master-data.')->group(function () {
