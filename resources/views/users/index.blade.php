@@ -28,14 +28,11 @@
                             <td>
                                 <div class="d-flex">
                                     <x-user.form-user :id="$user->id" />
-                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                        data-confirm-delete="true">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger ml-2">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    <a href="{{ route('users.destroy', $user->id) }}" data-confirm-delete="true"
+                                        class="btn btn-danger ml-2 mr-2">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                    <x-user.reset-password :id="$user->id" />
                                 </div>
                             </td>
                         </tr>

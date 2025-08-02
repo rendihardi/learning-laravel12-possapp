@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Kategori;
-
 use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
@@ -61,5 +61,19 @@ class ProductController extends Controller
         $product->delete();
         toast()->success('Produk berhasil dihapus');
         return redirect()->route('master-data.product.index');
+    }
+
+    public function getData(Request $request)
+    {
+        $search = $request->query('search');
+        $query = Product::query();
+        $product = $query->where('name_product', 'like', '%' . $search . '%')->get();
+        return response()->json($product);
+    }
+    public function cekStok(Request $request)
+    {
+        $id = $request->id;
+        $stok = Product::findOrFail($id)->stok;
+        return response()->json( $stok); 
     }
 }

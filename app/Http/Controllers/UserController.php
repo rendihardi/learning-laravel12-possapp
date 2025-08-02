@@ -46,6 +46,10 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        if($user->id == Auth::id()){
+            toast()->error('Anda tidak bisa menghapus diri sendiri');
+            return redirect()->route('users.index');
+        }
         $user->delete();
         toast()->success('User berhasil dihapus');
         return redirect()->route('users.index');
@@ -73,6 +77,22 @@ class UserController extends Controller
         $user->update(['password' => Hash::make($request->new_password)]);
 
         toast()->success('Password berhasil diganti');
+        return redirect()->route('dashboard');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:users,id',
+        ], [
+            'id.required' => 'ID user tidak boleh kosong',
+            'id.exists' => 'User tidak ditemukan',
+        ]);
+
+        $user = User::find($request->id);
+        $user->update(['password' => Hash::make('12345678')]);
+
+        toast()->success('Password berhasil direset ke default');
         return redirect()->route('users.index');
     }
 }

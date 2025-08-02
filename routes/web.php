@@ -6,6 +6,7 @@ use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PenerimaanBarangController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -18,11 +19,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+    Route::prefix('get-data')->as('get-data.')->group(function () {
+        Route::get('/products', [ProductController::class, 'getData'])->name('products');
+        Route::get('cek-stok', [ProductController::class, 'cekStok'])->name('cek-stok');
+    });
+
     Route::prefix('users')->as('users.')->controller(UserController::class)->group(function () {
        Route::get('/','index')->name('index');
        Route::post('/store', 'store')->name('store');
        Route::delete('/destroy/{id}', 'destroy')->name('destroy');
        Route::post('ganti-password', 'gantiPassword')->name('ganti-password');
+       Route::post('reset-password', 'resetPassword')->name('reset-password');
     });
     
     // master-data.kategori.index
@@ -37,5 +44,10 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::delete('/destroy/{id}', 'destroy')->name('destroy');
         });
+    });
+    Route::prefix('penerimaan-barang')->as('penerimaan-barang.')->controller(PenerimaanBarangController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::delete('/destroy/{id}', 'destroy')->name('destroy');
     });
 });

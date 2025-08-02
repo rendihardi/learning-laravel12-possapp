@@ -45,6 +45,12 @@ class Aside extends Component
                 ],
             ],
 
+        ],[
+            'label' => 'Penerimaan Barang',
+            'icon' => 'fas fa-truck-loading',
+            'route_name' =>'penerimaan-barang.index',
+            'route_active' => 'penerimaan-barang.*',
+            'is_dropdown' => false,
         ]
     ];
     }
