@@ -67,6 +67,8 @@ class PenerimaanBarangController extends Controller
     public function detailLaporan($no_penerimaan)
     {
         $data = PenerimaanBarang::with('items')->where('no_penerimaan', $no_penerimaan)->first();
+        $data->tanggal_penerimaan = Carbon::parse($data->created_at)->locale('id')->translatedFormat('l, d F Y');
+        $data->total=$data->items->sum('subtotal');
         return view('laporan.penerimaan-barang.detail', compact('data'));
     }
     

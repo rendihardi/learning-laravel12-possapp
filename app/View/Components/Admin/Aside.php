@@ -60,7 +60,7 @@ class Aside extends Component
             'dropdown' => [
                 [
                     'label' => 'Penerimaan Barang',
-                    'route_active' => 'laporan.penerimaan-barang.*',
+                   'route_active' => ['laporan.penerimaan-barang.*'],
                     'route_name' => 'laporan.penerimaan-barang.laporan',
                 ],
                 // [
