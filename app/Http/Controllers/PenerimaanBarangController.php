@@ -21,12 +21,13 @@ class PenerimaanBarangController extends Controller
      
         $request->validate([
            'distributor' => 'required|string|max:255',
-            'nomorFaktur' => 'required|string|max:255',
+            'nomorFaktur' => 'required|unique:penerimaan_barangs,no_faktur|string|max:255',
             'products' => 'required',
        ],
             [
                 'distributor.required' => 'Distributor is required.',
                 'nomorFaktur.required' => 'Nomor Faktur is required.',
+                'nomorFaktur.unique' => 'Nomor Faktur must be unique.',
                 'products.required' => 'At least one product must be selected.',
             ]
         );
@@ -52,7 +53,7 @@ class PenerimaanBarangController extends Controller
         }
         toast()->success('Penerimaan Barang berhasil disimpan.');
 
-        return redirect()->route('penerimaan-barang.index');
+        return redirect()->route('laporan.penerimaan-barang.detail-laporan', $newDataPenerimaanBarang->no_penerimaan);
     }
 
     public function laporan()

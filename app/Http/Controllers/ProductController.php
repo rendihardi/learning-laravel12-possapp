@@ -26,7 +26,6 @@ class ProductController extends Controller
             'harga_beli' => 'required|numeric|min:0',
             'stok' => 'required|integer|min:0',
             'stok_minimal' => 'required|integer|min:0',
-         
             'kategori_id' => 'required|exists:kategoris,id',
         ],[
             'name_product.required' => 'Nama Produk tidak boleh kosong',
@@ -75,5 +74,12 @@ class ProductController extends Controller
         $id = $request->id;
         $stok = Product::findOrFail($id)->stok;
         return response()->json( $stok); 
+    }
+
+    public function cekHargaJual(Request $request)
+    {
+        $id = $request->id;
+        $harga_jual = Product::findOrFail($id)->harga_jual;
+        return response()->json( $harga_jual); 
     }
 }

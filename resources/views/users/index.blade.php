@@ -4,6 +4,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">List of Users</h3>
+
             <div class="d-flex justify-content-end mb-2">
                 <x-user.form-user />
             </div>
@@ -40,4 +41,5 @@
                 </tbody>
             </table>
         </div>
-    @endsection
+    </div>
+@endsection

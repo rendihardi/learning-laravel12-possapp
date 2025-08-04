@@ -1,4 +1,4 @@
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4 layout-fixed">
             <!-- Brand Logo -->
             <a href="/dashboard" class="brand-link text-center">
                 {{-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -30,7 +30,7 @@
                             @if (!$route['is_dropdown'])
                                 <li class="nav-item">
                                     <a href={{ route($route['route_name']) }}
-                                        class="nav-link {{ request()->is($route['route_active']) ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs($route['route_active']) ? 'active' : '' }}">
                                         <i class=" nav-icon {{ $route['icon'] }}"></i>
                                         <p>
                                             {{ $route['label'] }}
@@ -40,7 +40,7 @@
                             @else
                                 <li
                                     class="nav-item {{ request()->routeIs($route['route_active']) ? 'menu-open' : '' }}">
-                                    <a href="#" class="nav-link ">
+                                    <a href="#" class="nav-link">
                                         <i class="nav-icon {{ $route['icon'] }}"></i>
                                         <p>
                                             {{ $route['label'] }}
