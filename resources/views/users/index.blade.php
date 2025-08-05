@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <x-alert :errors="$errors" />
-            <table class="table table-bordered table-hover">
+            <table id="table2" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>No</th>
